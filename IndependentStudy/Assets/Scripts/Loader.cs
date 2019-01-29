@@ -20,6 +20,6 @@ public class Loader : MonoBehaviour
         //if (SoundManager.instance == null)
 
             //Instantiate SoundManager prefab
-        //    Instantiate(soundManager);
+            //Instantiate(soundManager);
     }
 }
