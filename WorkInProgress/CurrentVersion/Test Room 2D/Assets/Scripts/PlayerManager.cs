@@ -15,16 +15,8 @@ public class PlayerManager : MonoBehaviour
     private int posX;
     private int posY;
 
-    private BoardManager boardScript;
-
-    private void Awake()
-    {
-        boardScript = GetComponent<BoardManager>();
-    }
-
     private void Start()
     {
-
         posX = 0;
         posY = 0;
     }
@@ -35,19 +27,16 @@ public class PlayerManager : MonoBehaviour
         //Following IF statements determine if WASD are pressed. If so, they move 1 value of moveDistance in the correct direction based on WASD keys
 
         //Forward (UP) movement
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && posY < 3)
         {
-            y = moveDistance;
-
-            x = 0;
-
-            transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
-
-            posY = posY + moveDistance;
             
+            y = moveDistance;
+            x = 0;
+            transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
+            posY = posY + moveDistance;
         }
         //Back(Down) movement
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S) && posY > 0)
         {
             y = -moveDistance;
             x = 0;
@@ -55,7 +44,7 @@ public class PlayerManager : MonoBehaviour
             posY = posY - moveDistance;
         }
         //Left movement
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.A) && posX > 0)
         {
             y = 0;
             x = -moveDistance;
@@ -63,7 +52,7 @@ public class PlayerManager : MonoBehaviour
             posX = posX - moveDistance;
         }
         //Right movement
-        else if(Input.GetKeyDown(KeyCode.D))
+        else if(Input.GetKeyDown(KeyCode.D) && posX < 3)
         {
             y = 0;
             x = moveDistance;
