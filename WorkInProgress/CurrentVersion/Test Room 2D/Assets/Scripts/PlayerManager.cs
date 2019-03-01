@@ -14,19 +14,19 @@ public class PlayerManager : MonoBehaviour
     //Current player position
     private int posX;
     private int posY;
+    private int gridArrayX;
+    private int gridArrayY;
 
-    private BoardManager boardScript;
-
-    private void Awake()
-    {
-        boardScript = GetComponent<BoardManager>();
-    }
+    public BoardManager boardScript;
 
     private void Start()
     {
 
         posX = 0;
         posY = 0;
+
+        gridArrayX = 1;
+        gridArrayY = 1;
     }
 
     private void Update()
@@ -37,38 +37,59 @@ public class PlayerManager : MonoBehaviour
         //Forward (UP) movement
         if (Input.GetKeyDown(KeyCode.W))
         {
-            y = moveDistance;
+            Debug.Log(boardScript.getTile(gridArrayX, gridArrayY + 1));
+            if (boardScript.getTile(gridArrayX, gridArrayY + 1) == false)
+            {
+                y = moveDistance;
+                x = 0;
+                transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
+                posY = posY + moveDistance;
+                gridArrayY = gridArrayY + moveDistance;
+                
+            }
 
-            x = 0;
-
-            transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
-
-            posY = posY + moveDistance;
-            
         }
         //Back(Down) movement
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            y = -moveDistance;
-            x = 0;
-            transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
-            posY = posY - moveDistance;
+            Debug.Log(boardScript.getTile(gridArrayX, gridArrayY - 1));
+            if (boardScript.getTile(gridArrayX, gridArrayY - 1) == false)
+            {
+                y = moveDistance;
+                x = 0;
+                transform.position = new Vector2(transform.position.x + x, transform.position.y - y);
+                posY = posY - moveDistance;
+                gridArrayY = gridArrayY - moveDistance;
+            }
+
         }
         //Left movement
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            y = 0;
-            x = -moveDistance;
-            transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
-            posX = posX - moveDistance;
+            Debug.Log(boardScript.getTile(gridArrayX - 1, gridArrayY));
+            if (boardScript.getTile(gridArrayX - 1, gridArrayY) == false)
+            {
+                y = 0;
+                x = moveDistance;
+                transform.position = new Vector2(transform.position.x - x, transform.position.y + y);
+                posX = posX - moveDistance;
+                gridArrayX = gridArrayX - moveDistance;
+            }
+
         }
         //Right movement
         else if(Input.GetKeyDown(KeyCode.D))
         {
-            y = 0;
-            x = moveDistance;
-            transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
-            posX = posX + moveDistance;
+            Debug.Log(boardScript.getTile(gridArrayX + 1, gridArrayY));
+            if (boardScript.getTile(gridArrayX + 1, gridArrayY) == false)
+            {
+                y = 0;
+                x = moveDistance;
+                transform.position = new Vector2(transform.position.x + x, transform.position.y + y);
+                posX = posX + moveDistance;
+                gridArrayX = gridArrayX + moveDistance;
+            }
+
         }
 
         
